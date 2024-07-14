@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" ng-app="userApp">
+<head>    
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+ 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>  	
+    <script src="JavaScript1.js"></script>  
+</head>
+
+<body>
+<div ng-controller="userCtrl" ng-init="initialization()"> 
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">New message </h5>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		  </div>
+		  <div class="modal-body">
+			<form>
+			  <div class="mb-3">
+				<label for="updateduserid" class="col-form-label">ID:</label>
+				<input type="number" class="form-control" ng-model="updateuser.id" id="updateduserid">
+			  </div>
+			  <div class="mb-3">
+				<label for="updatedusername" class="col-form-label">NAME:</label>
+				<input type="text" class="form-control" ng-model="updateuser.name" id="updatedusername">
+			  </div>
+			  <div class="mb-3">
+				<label for="updateduserage" class="col-form-label">AGE:</label>
+				<input type="number" class="form-control" ng-model="updateuser.age" id="updateduserage">
+			  </div>
+			  <div class="mb-3">
+                <label for="updatedusergender" class="col-form-label">GENDER</label>
+                <div class="col-sm-10">
+					<select class="form-control" id="updatedusergender" ng-model="updateuser.gender" style="width: 470px;">
+                    <option value="">Select your gender</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                   </select>
+                </div>
+            </div>						  
+			</form>
+		  </div>		  
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-bs-dismiss="modal" ng-click="updateUser(updateuser)">Update</button>
+			<button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">Delete Record</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+			  <div class="modal-body">
+				Do you want to delete record?
+			  </div>
+			  <div class="modal-footer">
+			    <button type="button" class="btn btn-primary"data-bs-dismiss="modal" ng-click="deleteUser()">Yes</button>
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+			  </div>
+			</div>
+		</div>
+	</div>  
+ 
+    <div class="container border m-5">
+        <form>
+		    <h2 class="text-center">USERS DATA</h2>
+			
+			
+			<div class="row m-1">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">NAME</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="newuser.name" placeholder="Enter your NAME" style="width: 300px;" >
+                </div>
+            </div>
+			<div class="row m-1">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">AGE</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" ng-model="newuser.age" placeholder="Enter your age" style="width: 300px;" >
+                </div>
+            </div>
+			<div class="row m-1">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">GENDER</label>
+                <div class="col-sm-10">
+					<select class="form-control" ng-model="newuser.gender" style="width: 300px;">
+                    <option value="">Select your gender</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
+                   </select>
+                </div>
+            </div>
+			
+		    <div class="row m-1 ">
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-primary" ng-click="addUser(newuser)">ADD</button>
+                </div>
+            </div>
+        </form>
+    </div>
+	
+    <div class="container m-5 p-0">
+		<div class="table-responsive com-table"> 
+			<table class="table table-hover table-striped">  				
+				<thead class="table-dark">
+					<tr>  
+						<th width="5%">id</th>  
+						<th width="60%">name</th>  
+						<th width="5%">age</th>  
+						<th width="10%">gender</th>  
+						<th width="10%">#</th>
+						<th width="10%">#</th>
+					</tr>				
+				</thead>  
+				
+				<tbody class="table-group-divider">  	  
+					<tr ng-repeat="user in userList" c>  
+						<td width="5%">{{user.id}}</td>  
+						<td width="60%">{{user.name}}</td>  
+						<td width="5%">{{user.age}}</td>  
+						<td width="10%">{{user.gender}}</td>  
+						<td width="10%">
+							<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" ng-click="updateform(user)" data-bs-target="#exampleModal" >update</button>
+						</td>
+						<td width="10%">
+							<button type="button" class="btn btn-danger btn-sm"data-bs-toggle="modal" ng-click="deleteform(user.id)"data-bs-target="#staticBackdrop">Delete</button>
+						</td>						
+					</tr>					
+				</tbody>  
+			</table>  
+		</div>		
+	</div>       
+</div>  
+</body>
+</html>
